@@ -20,8 +20,8 @@ Base.promote_rule(::Type{Unit}, ::Type{I}) where {I <: Number} = I
 Base.convert(::Type{T}, ::Unit) where {T} = one(T)
 Base.convert(::Type{Rational{T}}, ::Unit) where {T<:Integer} = one(Rational{T})
 Base.convert(::Type{T}, ::Unit) where {T<:Number} = one(T)
-Base.one(::Type{Unit}) = Unit()
 Base.convert(::Type{T}, ::T) where {T<:Unit} = one(T)
+Base.one(::Type{Unit}) = Unit()
 
 
 # Another convenient singleton type, good for subtracting epochs
