@@ -88,37 +88,37 @@ end
 @inline Base.:/(d::Duration{P}, s::Number) where {P} = ((dp, sp) = promote(get(d), s); Duration{P}(dp / s))
 @inline Base.://(d::Duration{P}, s::Number) where {P} = ((dp, sp) = promote(get(d), s); Duration{P}(dp // s))
 
-# Interface with Base.Dates. Autoconversion will result in Floats, not Rationals
-Base.convert(::Type{Duration}, d::Base.Dates.Week) = Duration{604800//1,Int64}(d.value)
-Base.convert(::Type{Duration}, d::Base.Dates.Day) = Duration{86400//1,Int64}(d.value)
-Base.convert(::Type{Duration}, d::Base.Dates.Hour) = Duration{3600//1,Int64}(d.value)
-Base.convert(::Type{Duration}, d::Base.Dates.Minute) = Duration{60//1,Int64}(d.value)
-Base.convert(::Type{Duration}, d::Base.Dates.Second) = Duration{1//1,Int64}(d.value)
-Base.convert(::Type{Duration}, d::Base.Dates.Millisecond) = Duration{1//1000,Int64}(d.value)
+# Interface with Dates. Autoconversion will result in Floats, not Rationals
+Base.convert(::Type{Duration}, d::Dates.Week) = Duration{604800//1,Int64}(d.value)
+Base.convert(::Type{Duration}, d::Dates.Day) = Duration{86400//1,Int64}(d.value)
+Base.convert(::Type{Duration}, d::Dates.Hour) = Duration{3600//1,Int64}(d.value)
+Base.convert(::Type{Duration}, d::Dates.Minute) = Duration{60//1,Int64}(d.value)
+Base.convert(::Type{Duration}, d::Dates.Second) = Duration{1//1,Int64}(d.value)
+Base.convert(::Type{Duration}, d::Dates.Millisecond) = Duration{1//1000,Int64}(d.value)
 
-Base.convert(::Type{Duration{P}}, d::Base.Dates.Week) where {P} = Duration{P}(d.value * P * 604800)
-Base.convert(::Type{Duration{P}}, d::Base.Dates.Day) where {P} = Duration{P}(d.value * P * 86400)
-Base.convert(::Type{Duration{P}}, d::Base.Dates.Hour) where {P} = Duration{P}(d.value * P * 3600)
-Base.convert(::Type{Duration{P}}, d::Base.Dates.Minute) where {P} = Duration{P}(d.value * P * 60)
-Base.convert(::Type{Duration{P}}, d::Base.Dates.Second) where {P} = Duration{P}(d.value * P)
-Base.convert(::Type{Duration{P}}, d::Base.Dates.Millisecond) where {P} = Duration{P}(d.value * P / 1000)
+Base.convert(::Type{Duration{P}}, d::Dates.Week) where {P} = Duration{P}(d.value * P * 604800)
+Base.convert(::Type{Duration{P}}, d::Dates.Day) where {P} = Duration{P}(d.value * P * 86400)
+Base.convert(::Type{Duration{P}}, d::Dates.Hour) where {P} = Duration{P}(d.value * P * 3600)
+Base.convert(::Type{Duration{P}}, d::Dates.Minute) where {P} = Duration{P}(d.value * P * 60)
+Base.convert(::Type{Duration{P}}, d::Dates.Second) where {P} = Duration{P}(d.value * P)
+Base.convert(::Type{Duration{P}}, d::Dates.Millisecond) where {P} = Duration{P}(d.value * P / 1000)
 
-Base.convert(::Type{Duration{P,T}}, d::Base.Dates.Week) where {P,T} = Duration{P,T}(d.value * P * 604800)
-Base.convert(::Type{Duration{P,T}}, d::Base.Dates.Day) where {P,T} = Duration{P,T}(d.value * P * 86400)
-Base.convert(::Type{Duration{P,T}}, d::Base.Dates.Hour) where {P,T} = Duration{P,T}(d.value * P * 3600)
-Base.convert(::Type{Duration{P,T}}, d::Base.Dates.Minute) where {P,T} = Duration{P,T}(d.value * P * 60)
-Base.convert(::Type{Duration{P,T}}, d::Base.Dates.Second) where {P,T} = Duration{P,T}(d.value * P)
-Base.convert(::Type{Duration{P,T}}, d::Base.Dates.Millisecond) where {P,T} = Duration{P,T}(d.value * P / 1000)
+Base.convert(::Type{Duration{P,T}}, d::Dates.Week) where {P,T} = Duration{P,T}(d.value * P * 604800)
+Base.convert(::Type{Duration{P,T}}, d::Dates.Day) where {P,T} = Duration{P,T}(d.value * P * 86400)
+Base.convert(::Type{Duration{P,T}}, d::Dates.Hour) where {P,T} = Duration{P,T}(d.value * P * 3600)
+Base.convert(::Type{Duration{P,T}}, d::Dates.Minute) where {P,T} = Duration{P,T}(d.value * P * 60)
+Base.convert(::Type{Duration{P,T}}, d::Dates.Second) where {P,T} = Duration{P,T}(d.value * P)
+Base.convert(::Type{Duration{P,T}}, d::Dates.Millisecond) where {P,T} = Duration{P,T}(d.value * P / 1000)
 
-Base.convert(::Type{Base.Dates.Week}, d::Duration{P}) where {P} = Base.Dates.Week(div(Int64(d.value * P), 604800))
-Base.convert(::Type{Base.Dates.Day}, d::Duration{P}) where {P} = Base.Dates.Day(div(Int64(d.value * P), 86400))
-Base.convert(::Type{Base.Dates.Hour}, d::Duration{P}) where {P} = Base.Dates.Hour(div(Int64(d.value * P), 3600))
-Base.convert(::Type{Base.Dates.Minute}, d::Duration{P}) where {P} = Base.Dates.Minute(div(Int64(d.value * P), 60))
-Base.convert(::Type{Base.Dates.Second}, d::Duration{P}) where {P} = Base.Dates.Second(Int(d.value * P))
-Base.convert(::Type{Base.Dates.Millisecond}, d::Duration{P}) where {P} = Base.Dates.Millisecond(Int(d.value * P) * 1000)
+Base.convert(::Type{Dates.Week}, d::Duration{P}) where {P} = Dates.Week(div(Int64(d.value * P), 604800))
+Base.convert(::Type{Dates.Day}, d::Duration{P}) where {P} = Dates.Day(div(Int64(d.value * P), 86400))
+Base.convert(::Type{Dates.Hour}, d::Duration{P}) where {P} = Dates.Hour(div(Int64(d.value * P), 3600))
+Base.convert(::Type{Dates.Minute}, d::Duration{P}) where {P} = Dates.Minute(div(Int64(d.value * P), 60))
+Base.convert(::Type{Dates.Second}, d::Duration{P}) where {P} = Dates.Second(Int(d.value * P))
+Base.convert(::Type{Dates.Millisecond}, d::Duration{P}) where {P} = Dates.Millisecond(Int(d.value * P) * 1000)
 
-Base.promote_rule(::Type{Duration{P,T}}, ::Type{DatesPeriod}) where {P,T, DatesPeriod <: Base.Dates.Period} = Duration{P, T}
-Base.promote_rule(::Type{Duration{P,T}}, ::Type{DatesPeriod}) where {P,T, DatesPeriod <: Base.Dates.Millisecond} = Duration{P, promote_op(/, T, Int)}
+Base.promote_rule(::Type{Duration{P,T}}, ::Type{DatesPeriod}) where {P,T, DatesPeriod <: Dates.Period} = Duration{P, T}
+Base.promote_rule(::Type{Duration{P,T}}, ::Type{DatesPeriod}) where {P,T, DatesPeriod <: Dates.Millisecond} = Duration{P, promote_op(/, T, Int)}
 
 
 # Export some convenience timescales as efficient singletons, e.g. week or weeks

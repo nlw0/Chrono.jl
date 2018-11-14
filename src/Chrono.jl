@@ -1,6 +1,6 @@
 module Chrono
 
-using Base.Dates
+using Dates
 
 import Base: @pure, ==
 
